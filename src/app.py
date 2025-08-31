@@ -8,9 +8,7 @@ from flask_cors import CORS
 from utils import APIException, generate_sitemap
 from admin.setup_admin import setup_admin
 
-from models import db
-from routes.users import register_user_routes
-from routes.posts import register_post_routes
+from models import db, User, Post, Comment, Featured
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -41,9 +39,6 @@ def handle_invalid_usage(error):
 def sitemap():
     return generate_sitemap(app)
 
-
-register_user_routes(app)
-register_post_routes(app)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 3000))
